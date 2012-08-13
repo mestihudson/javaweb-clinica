@@ -1,42 +1,52 @@
 package br.com.fiap.clinica.modelo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="agendamento")
+@Table(name = "agendamento")
 public class Agendamento implements Serializable {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
-	@Column(name="data_consulta")
+
+	@Column(name = "data_consulta")
 	private Date dataConsulta;
-	
-	@Column(name="numero_convenio")
+
+	@Column(name = "numero_convenio")
 	private Long numeroConvenio;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_paciente")
+	@JoinColumn(name = "id_paciente")
 	private Paciente paciente;
 
 	@ManyToOne
-	@JoinColumn(name="id_convenio")
+	@JoinColumn(name = "id_convenio")
 	private Convenio convenio;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_medico")
+	@JoinColumn(name = "id_medico")
 	private Medico medico;
-	
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "agendamento")
+	private Collection<Atendimento> atendimentos;
+
+	private AgendamentoStatus agendamentoStatus;
+
+	private Boolean ativo;
+
 	public Long getId() {
 		return id;
 	}
@@ -84,6 +94,29 @@ public class Agendamento implements Serializable {
 	public void setMedico(Medico medico) {
 		this.medico = medico;
 	}
-	
-	
+
+	public AgendamentoStatus getAgendamentoStatus() {
+		return agendamentoStatus;
+	}
+
+	public void setAgendamentoStatus(AgendamentoStatus agendamentoStatus) {
+		this.agendamentoStatus = agendamentoStatus;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public Collection<Atendimento> getAtendimentos() {
+		return atendimentos;
+	}
+
+	public void setAtendimentos(Collection<Atendimento> atendimentos) {
+		this.atendimentos = atendimentos;
+	}
+
 }
