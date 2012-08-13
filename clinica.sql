@@ -274,6 +274,23 @@ CREATE  TABLE IF NOT EXISTS `atendimento_material` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `usuario`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `usuario` ;
+
+CREATE  TABLE IF NOT EXISTS `usuario` (
+  `id` INT NOT NULL ,
+  `nome` VARCHAR(50) NULL ,
+  `login` VARCHAR(45) NULL ,
+  `senha` VARCHAR(45) NULL ,
+  `ativo` TINYINT(1) NULL ,
+  `admin` TINYINT(1) NULL ,
+  `dt_cadastro` TIMESTAMP NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
