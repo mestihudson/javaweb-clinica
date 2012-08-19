@@ -1,25 +1,29 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<title>Cadastro de Usuários</title>
+	<title>Cadastro de UsuÃ¡rios</title>
 </h:head>
 <h:body> 
+	<!-- Menu -->
+	<ui:include src="menu.xhtml"/>
+	
 	<h:form>
-		<p:panel id="cadastroUsuario" header="Cadastro de Usuário">
+		<p:panel id="cadastroUsuario" header="Cadastro de UsuÃ¡rio">
 			<p:messages/>
 			<h:panelGrid columns="2">			
 				<h:outputLabel for="nome" value="Nome"/>
-				<p:inputText id="nome" required="true"/>
+				<p:inputText id="nome" required="true" value="#{usuarioBean.usuario.nome}"/>
 				<h:outputLabel for="login" value="Login"/>
-				<p:inputText id="login" required="true"/>
+				<p:inputText id="login" required="true" value="#{usuarioBean.usuario.login}"/>
 				<h:outputLabel for="senha" value="Senha"/>
-				<p:inputText id="senha" required="true"/>
+				<p:password id="senha" required="true" value="#{usuarioBean.usuario.senha}"/>
 				<h:outputLabel for="admin" value="Admin?"/>
-				<p:selectBooleanCheckbox id="admin" />
+				<p:selectBooleanCheckbox id="admin" value="#{usuarioBean.usuario.admin}"/>
 				
 				<p:commandButton id="gravar" value="Gravar" />
 			</h:panelGrid>

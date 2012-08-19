@@ -8,7 +8,7 @@ import br.com.fiap.clinica.modelo.Usuario;
 @ManagedBean
 public class UsuarioBean {
 
-	private Usuario usuario;
+	private Usuario usuario = new Usuario();
 	
 	public Usuario getUsuario() {
 		return this.usuario;

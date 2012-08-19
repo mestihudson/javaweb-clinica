@@ -8,7 +8,7 @@ import br.com.fiap.clinica.modelo.Area;
 @ManagedBean
 public class AreaBean {
 
-	private Area area;
+	private Area area = new Area();
 	
 	public Area getArea() {
 		return this.area;

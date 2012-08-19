@@ -8,7 +8,7 @@ import br.com.fiap.clinica.modelo.Convenio;
 @ManagedBean
 public class ConvenioBean {
 
-	private Convenio convenio;
+	private Convenio convenio = new Convenio();
 	
 	public Convenio getConvenio() {
 		return this.convenio;

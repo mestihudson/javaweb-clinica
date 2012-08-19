@@ -8,7 +8,7 @@ import br.com.fiap.clinica.modelo.Paciente;
 @ManagedBean
 public class PacienteBean {
 
-	private Paciente paciente;
+	private Paciente paciente = new Paciente();
 	
 	public Paciente getPaciente() {
 		return this.paciente;

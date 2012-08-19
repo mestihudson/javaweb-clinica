@@ -33,7 +33,7 @@ public class Usuario {
 		return senha;
 	}
 
-	public Boolean isAdmin() {
+	public Boolean getAdmin() {
 		return admin;
 	}
 

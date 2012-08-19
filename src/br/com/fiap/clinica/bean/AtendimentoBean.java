@@ -8,7 +8,7 @@ import br.com.fiap.clinica.modelo.Atendimento;
 @ManagedBean
 public class AtendimentoBean {
 
-	private Atendimento atendimento;
+	private Atendimento atendimento = new Atendimento();
 	
 	public Atendimento getAtendimento() {
 		return this.atendimento;

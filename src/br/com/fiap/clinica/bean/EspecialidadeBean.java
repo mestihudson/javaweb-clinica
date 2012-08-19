@@ -8,7 +8,7 @@ import br.com.fiap.clinica.modelo.Especialidade;
 @ManagedBean
 public class EspecialidadeBean {
 
-	private Especialidade especialidade;
+	private Especialidade especialidade = new Especialidade();
 	
 	public Especialidade getEspecialidade() {
 		return this.especialidade;

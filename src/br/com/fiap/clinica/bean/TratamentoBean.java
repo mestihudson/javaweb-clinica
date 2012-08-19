@@ -8,7 +8,7 @@ import br.com.fiap.clinica.modelo.Tratamento;
 @ManagedBean
 public class TratamentoBean {
 
-	private Tratamento tratamento;
+	private Tratamento tratamento = new Tratamento();
 	
 	public Tratamento getTratamento() {
 		return this.tratamento;

@@ -8,7 +8,7 @@ import br.com.fiap.clinica.modelo.Agendamento;
 @ManagedBean
 public class AgendamentoBean {
 
-	private Agendamento agendamento;
+	private Agendamento agendamento = new Agendamento();
 	
 	public Agendamento getAgendamento() {
 		return this.agendamento;

@@ -8,7 +8,7 @@ import br.com.fiap.clinica.modelo.Material;
 @ManagedBean
 public class MaterialBean {
 
-	private Material material;
+	private Material material = new Material();
 	
 	public Material getMaterial() {
 		return this.material;
