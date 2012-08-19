@@ -1,0 +1,11 @@
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+#conteudo {
+	margin: 0 auto;
+	width: 1000px;
+	text-align: left;
+}
