@@ -8,9 +8,19 @@
     <p:menubar>
         <p:submenu label="Cadastros">  
             <p:menuitem value="Paciente" url="cadastroPaciente.xhtml" />  
-            <p:menuitem value="Medico" url="#" />
-            <p:menuitem value="Especialidade" url="#" />
+            <p:menuitem value="Medico" url="cadastroMedico.xhtml" />
+            <p:menuitem value="Especialidade" url="cadastroEspecialidade.xhtml" />
             <p:menuitem value="Usuario" url="cadastroUsuario.xhtml" />  
+            <p:menuitem value="Area" url="cadastroArea.xhtml"/>
+            <p:menuitem value="Material" url="cadastroMaterial.xhtml" />
+            <p:menuitem value="Convenio" url="cadastroConvenio.xhtml" />
+        </p:submenu>
+        <p:submenu label="Atendimento">
+        	<p:menuitem value="Atendimento" url="cadastroAtendimento.xthml" />
+        	<p:menuitem value="Agendamento" url="cadastroAgendamento.xhtml" />
+        	<p:menuitem value="Tratamento" url="cadastroTratamento.xhtml" />
         </p:submenu>     
+       	<p:menuitem value="Sair" url="logout.xhtml" />
     </p:menubar>
+    
 </ui:composition>
