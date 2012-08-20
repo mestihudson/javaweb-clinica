@@ -13,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="material_tipo")
 public class MaterialTipo implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue

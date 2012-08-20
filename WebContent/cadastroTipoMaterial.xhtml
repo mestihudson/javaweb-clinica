@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<title>Cadastro de Tipos de Materiais</title>
+		<link type="text/css" rel="stylesheet" href="css/estilo.css"/>
+		<link type="text/css" rel="stylesheet" href="css/cupertino/jquery.ui.theme.css"/>	
+	</h:head>
+	<h:body>
+		<div id="conteudo">
+			<!-- Menu -->
+			<ui:include src="menu.xhtml" />
+			<br/>
+			
+			<h:form id="form">  
+			    <p:panel id="panel" header="Cadastro de Tipos de Materiais" style="margin-bottom:10px;">  
+			        <p:messages id="messages" />  
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Descrição:" for="txtDescricao"/>
+						<p:inputText value="#{tipoMaterialBean.tipoMaterial.descricao}" id="txtDescricao"/>
+						<p:outputLabel value="Ativado:" for="optAtivo"/>
+						<p:selectBooleanButton value="#{tipoMaterialBean.tipoMaterial.ativo}" id="optAtivo" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
+						<p:commandButton value="Cancelar" update="panel" id="btnCancelar" actionListener="#{tipoMaterialBean.limpaForm}" /> 
+				    	<p:commandButton value="Salvar" update="@form" id="btnSalvar" actionListener="#{tipoMaterialBean.grava}" /> 
+					</h:panelGrid>
+			    </p:panel>  
+			    <p:dataTable value="#{tipoMaterialBean.tipos}" var="tipo" paginator="true" rows="10"  
+		                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+		                 rowsPerPageTemplate="5,10,15">
+					<f:facet name="header">
+						Tipos de Materiais Cadastrados
+					</f:facet>
+			    	<p:column headerText="ID">
+			    		<h:outputText value="#{tipo.id}"/>
+			    	</p:column>
+			    	<p:column headerText="Descrição">
+			    		<h:outputText value="#{tipo.descricao}"/>
+			    	</p:column>
+			    	<p:column headerText="Ativado">
+			    		<h:outputText value="#{tipo.ativo}"/>
+			    	</p:column>
+			    	<p:column headerText="Opções">
+			    		<p:commandButton icon="ui-icon-pencil" title="Editar" action="#{tipoMaterialBean.edita(tipo)}" update="@form"/>
+			    		<p:commandButton icon="ui-icon-close" title="Remover" action="#{tipoMaterialBean.remove(tipo)}" update="@form"/>
+			    	</p:column>
+			    </p:dataTable>
+			</h:form>
+		</div>
+	</h:body>	
+</html>
