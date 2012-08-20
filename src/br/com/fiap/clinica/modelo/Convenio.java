@@ -13,7 +13,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="convenio")
 public class Convenio implements Serializable {
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private Long id;

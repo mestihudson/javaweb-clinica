@@ -14,4 +14,8 @@ public class LoginBean {
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
+	
+	public String login(){
+		return "cadastroConvenio";
+	}
 }

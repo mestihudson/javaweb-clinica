@@ -5,15 +5,51 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<title>Cadastro de Convênios</title>
-	<link type="text/css" rel="stylesheet" href="css/estilo.css"/>
-	<link type="text/css" rel="stylesheet" href="css/cupertino/jquery.ui.theme.css"/>	
-</h:head>
-<h:body>
-<div id="conteudo">
-	<!-- Menu -->
-	<ui:include src="menu.xhtml" />
-</div>
-</h:body>	
+	<h:head>
+		<title>Cadastro de Convênios</title>
+		<link type="text/css" rel="stylesheet" href="css/estilo.css"/>
+		<link type="text/css" rel="stylesheet" href="css/cupertino/jquery.ui.theme.css"/>	
+	</h:head>
+	<h:body>
+		<div id="conteudo">
+			<!-- Menu -->
+			<ui:include src="menu.xhtml" />
+			<br/>
+			
+			
+			<h:form id="form">  
+			    <p:panel id="panel" header="Cadastro de Convênios" style="margin-bottom:10px;">  
+			        <p:messages id="messages" />  
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Descrição:" for="txtDescricao"/>
+						<p:inputText value="#{convenioBean.convenio.descricao}" id="txtDescricao"/>
+						<p:outputLabel value="Ativado:" for="optAtivo"/>
+						<p:selectBooleanButton value="#{convenioBean.convenio.ativo}" id="optAtivo" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
+						<p:commandButton value="Cancelar" update="panel" id="btnCancelar" actionListener="#{convenioBean.limpaForm}" /> 
+				    	<p:commandButton value="Salvar" update="@form" id="btnSalvar" actionListener="#{convenioBean.grava}" /> 
+					</h:panelGrid>
+			    </p:panel>  
+			    <p:dataTable value="#{convenioBean.convenios}" var="convenio" paginator="true" rows="10"  
+		                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+		                 rowsPerPageTemplate="5,10,15">
+					<f:facet name="header">
+						Convênios Cadastrados
+					</f:facet>
+			    	<p:column headerText="ID">
+			    		<h:outputText value="#{convenio.id}"/>
+			    	</p:column>
+			    	<p:column headerText="Descrição">
+			    		<h:outputText value="#{convenio.descricao}"/>
+			    	</p:column>
+			    	<p:column headerText="Ativado">
+			    		<h:outputText value="#{convenio.ativo}"/>
+			    	</p:column>
+			    	<p:column headerText="Opções">
+			    		<p:commandButton icon="ui-icon-pencil" title="Editar" action="#{convenioBean.edita(convenio)}" update="@form"/>
+			    		<p:commandButton icon="ui-icon-close" title="Remover" action="#{convenioBean.remove(convenio)}" update="@form"/>
+			    	</p:column>
+			    </p:dataTable>
+			</h:form>
+		</div>
+	</h:body>	
 </html>

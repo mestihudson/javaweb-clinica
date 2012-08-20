@@ -1,51 +1,44 @@
 package br.com.fiap.clinica.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
 
-import org.hibernate.Criteria;
-
-public class DAO<T> {
+public class DAO<T> implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
 	private final Class<T> classe;
+
+	private final EntityManager em;
 	
-	public DAO(Class<T> classe) {
+	public DAO(Class<T> classe, EntityManager em) {
 		this.classe = classe;
+		this.em = em;
 	}
 	
 	public void adiciona(T t) {
-		EntityManager em = new JPAUtil().getEntityManager();
-		em.getTransaction().begin();
 		em.persist(t);
-		em.getTransaction().commit();
-		em.close();
 	}
 	
 	public void atualiza(T t) {
-		EntityManager em = new JPAUtil().getEntityManager();
-		em.getTransaction().begin();
 		em.merge(t);
-		em.getTransaction().commit();
-		em.close();
 	}
 	
 	public void remove(T t) {
-		EntityManager em = new JPAUtil().getEntityManager();
-		em.getTransaction().begin();
 		em.remove(t);
-		em.getTransaction().commit();
-		em.close();
+	}
+	
+	public T buscaPeloId(Long id){
+		return em.find(classe, id);
 	}
 	
 	public List<T> lista() {
-		EntityManager em = new JPAUtil().getEntityManager();
 		CriteriaQuery<T> query = em.getCriteriaBuilder().createQuery(classe);
 		query.select(query.from(classe));
 		
 		List<T> lista = em.createQuery(query).getResultList();
-		em.close();
 		
 		return lista;		
 	}
