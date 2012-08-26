@@ -5,15 +5,63 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<title>Cadastro de Pacientes</title>
-	<link type="text/css" rel="stylesheet" href="css/estilo.css"/>
-	<link type="text/css" rel="stylesheet" href="css/cupertino/jquery.ui.theme.css"/>	
-</h:head>
-<h:body>
-<div id="conteudo">
-	<!-- Menu -->
-	<ui:include src="menu.xhtml" />
-</div>
-</h:body>	
+	<h:head>
+		<title>Cadastro de Material/Medicamento</title>
+		<link type="text/css" rel="stylesheet" href="css/estilo.css"/>
+		<link type="text/css" rel="stylesheet" href="css/cupertino/jquery.ui.theme.css"/>	
+	</h:head>
+	<h:body>
+		<div id="conteudo">
+			<!-- Menu -->
+			<ui:include src="menu.xhtml" />
+			<br/>
+			
+			<h:form id="form">  
+			    <p:panel id="panel" header="Cadastro de Material/Medicamento" style="margin-bottom:10px;">  
+			        <p:messages id="messages" />  
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Descrição:" for="txtDescricao"/>
+						<p:inputText value="#{materialBean.material.descricao}" id="txtDescricao"/>
+						<p:outputLabel value="Valor Remuneração:" for="txtValorRemuneracao"/>
+						<p:inputText value="#{materialBean.material.valorRemuneracao}" id="txtValorRemuneracao"/>
+						<p:outputLabel value="Ativado:" for="optAtivo"/>
+						<p:selectBooleanButton value="#{materialBean.material.ativo}" id="optAtivo" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
+						<p:outputLabel value="Tipo de Material:" for="cmbTipoMaterial"/>
+						<p:selectOneMenu value="#{materialBean.tipo.id}" id="cmbTipoMaterial">
+				            <f:selectItem itemLabel="--- Selecione ---" itemValue=""/>  
+				            <f:selectItems value="#{materialBean.tiposMateriais}" var="a" itemLabel="#{a.descricao}" itemValue="#{a.id}" />    
+				        </p:selectOneMenu>  
+						<p:commandButton value="Cancelar" update="panel" id="btnCancelar" actionListener="#{materialBean.limpaForm}" /> 
+				    	<p:commandButton value="Salvar" update="@form" id="btnSalvar" actionListener="#{materialBean.grava}" /> 
+					</h:panelGrid>
+			    </p:panel>  
+			    <p:dataTable value="#{materialBean.materiais}" var="material" paginator="true" rows="10"  
+		                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+		                 rowsPerPageTemplate="5,10,15">
+					<f:facet name="header">
+						Materiais/Medicamentos Cadastrados 
+					</f:facet>
+			    	<p:column headerText="ID">
+			    		<h:outputText value="#{material.id}"/>
+			    	</p:column>
+			    	<p:column headerText="Descrição">
+			    		<h:outputText value="#{material.descricao}"/>
+			    	</p:column>
+			    	<p:column headerText="Valor Remuneração(R$)">
+			    		<h:outputText value="#{material.valorRemuneracao}"/>
+			    	</p:column>
+			    	<p:column headerText="Tipo de Material">
+			    		<h:outputText value="#{material.materialTipo.descricao}"/>
+			    	</p:column>
+			    	<p:column headerText="Ativado">
+			    		<h:outputText value="#{material.ativo}"/>
+			    	</p:column>
+			    	<p:column headerText="Opções">
+			    		<p:commandButton icon="ui-icon-pencil" title="Editar" action="#{materialBean.edita(material)}" update="@form"/>
+			    		<p:commandButton icon="ui-icon-trash" title="Remover" action="#{materialBean.remove(material)}" update="@form"/>
+			    	</p:column>
+			    </p:dataTable>
+			</h:form>
+		</div>
+	</h:body>	
 </html>
