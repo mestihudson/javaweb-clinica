@@ -5,15 +5,56 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<title>Cadastro de Tratamentos</title>
-	<link type="text/css" rel="stylesheet" href="css/estilo.css"/>
-	<link type="text/css" rel="stylesheet" href="css/cupertino/jquery.ui.theme.css"/>	
-</h:head>
-<h:body>
-<div id="conteudo">
-	<!-- Menu -->
-	<ui:include src="menu.xhtml" />
-</div>
-</h:body>	
+	<h:head>
+		<title>Cadastro de Tratamento</title>
+		<link type="text/css" rel="stylesheet" href="css/estilo.css"/>
+		<link type="text/css" rel="stylesheet" href="css/cupertino/jquery.ui.theme.css"/>	
+	</h:head>
+	<h:body>
+		<div id="conteudo">
+			<!-- Menu -->
+			<ui:include src="menu.xhtml" />
+			<br/>
+			
+			
+			<h:form id="form">  
+			    <p:panel id="panel" header="Cadastro de Tratamento" style="margin-bottom:10px;">  
+			        <p:messages id="messages" />  
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Descrição:" for="txtDescricao"/>
+						<p:inputText value="#{tratamentoBean.tratamento.descricao}" id="txtDescricao"/>
+						<p:outputLabel value="Valor de Remuneração:" for="txtValorRemuneracao"/>
+						<p:inputText value="#{tratamentoBean.tratamento.valorRemuneracao}" id="txtValorRemuneracao"/>
+						<p:outputLabel value="Ativado:" for="optAtivo"/>
+						<p:selectBooleanButton value="#{tratamentoBean.tratamento.ativo}" id="optAtivo" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
+						<p:commandButton value="Cancelar" update="panel" id="btnCancelar" actionListener="#{tratamentoBean.limpaForm}" /> 
+				    	<p:commandButton value="Salvar" update="@form" id="btnSalvar" actionListener="#{tratamentoBean.grava}" /> 
+					</h:panelGrid>
+			    </p:panel>  
+			    <p:dataTable value="#{tratamentoBean.tratamentos}" var="trata" paginator="true" rows="10"  
+		                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+		                 rowsPerPageTemplate="5,10,15">
+					<f:facet name="header">
+						Tratamentos Cadastrados
+					</f:facet>
+			    	<p:column headerText="ID">
+			    		<h:outputText value="#{trata.id}"/>
+			    	</p:column>
+			    	<p:column headerText="Descrição">
+			    		<h:outputText value="#{trata.descricao}"/>
+			    	</p:column>
+			    	<p:column headerText="Valor de Remuneração(R$)">
+			    		<h:outputText value="#{trata.valorRemuneracao}"/>
+			    	</p:column>
+			    	<p:column headerText="Ativado">
+			    		<h:outputText value="#{trata.ativo}"/>
+			    	</p:column>
+			    	<p:column headerText="Opções">
+			    		<p:commandButton icon="ui-icon-pencil" title="Editar" action="#{tratamentoBean.edita(trata)}" update="@form"/>
+			    		<p:commandButton icon="ui-icon-close" title="Remover" action="#{tratamentoBean.remove(trata)}" update="@form"/>
+			    	</p:column>
+			    </p:dataTable>
+			</h:form>
+		</div>
+	</h:body>	
 </html>
