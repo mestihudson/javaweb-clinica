@@ -14,6 +14,24 @@
 <div id="conteudo">
 	<!-- Menu -->
 	<ui:include src="menu.xhtml" />
+	<br />
+	
+	<h:form id="form">
+		<p:panel id="panel" header="Cadastro de Médicos">
+			<p:messages id="messages" />
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Nome:" for="txtNome"/>
+				<p:inputText value="#{medicoBean.medico.nome}" id="txtNome"/>
+				<p:outputLabel value="Sobrenome:" for="txtSobrenome"/>
+				<p:inputText value="#{medicoBean.medico.sobrenome}" id="txtSobrenome"/>
+				<p:outputLabel value="Ativo:" for="optAtivo"/>
+				<p:selectBooleanButton value="#{medicoBean.medico.ativo}" id="optAtivo" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
+				<p:commandButton value="Cancelar" update="panel" id="btnCancelar" actionListener="#{medicoBean.limpaForm}" />
+				<p:commandButton value="Salvar"   update="@form" id="btnSalvar"   actionListener="#{medicoBean.grava}" />
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+	
 </div>
 </h:body>	
 </html>
