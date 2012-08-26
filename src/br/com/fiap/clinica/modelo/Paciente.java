@@ -28,6 +28,8 @@ public class Paciente implements Serializable {
 	
 	private String cpf;
 	
+	private Boolean ativo;
+	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="paciente")
 	private Collection<Agendamento> agendamentos;
 
@@ -69,6 +71,14 @@ public class Paciente implements Serializable {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+	
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	public Collection<Agendamento> getAgendamentos() {
