@@ -24,12 +24,43 @@
 				<p:inputText value="#{medicoBean.medico.nome}" id="txtNome"/>
 				<p:outputLabel value="Sobrenome:" for="txtSobrenome"/>
 				<p:inputText value="#{medicoBean.medico.sobrenome}" id="txtSobrenome"/>
+			 	<p:outputLabel value="Especialidade:" for="cmbEspecialidade"/>
+		        <p:selectOneMenu value="#{medicoBean.medico.especialidade.id}" id="cmbEspecialidade">  
+		            <f:selectItem itemLabel="--- Selecione ---" itemValue="" />  
+		            <f:selectItems value="#{medicoBean.especialidades}" var="a" itemLabel="#{a.descricao}" itemValue="#{a.id}" />  
+		        </p:selectOneMenu>
 				<p:outputLabel value="Ativo:" for="optAtivo"/>
 				<p:selectBooleanButton value="#{medicoBean.medico.ativo}" id="optAtivo" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
 				<p:commandButton value="Cancelar" update="panel" id="btnCancelar" actionListener="#{medicoBean.limpaForm}" />
 				<p:commandButton value="Salvar"   update="@form" id="btnSalvar"   actionListener="#{medicoBean.grava}" />
 			</h:panelGrid>
 		</p:panel>
+	    <p:dataTable value="#{medicoBean.medicos}" var="med" paginator="true" rows="10"  
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 rowsPerPageTemplate="5,10,15">
+			<f:facet name="header">
+				Médicos
+			</f:facet>
+	    	<p:column headerText="ID">
+	    		<h:outputText value="#{med.id}"/>
+	    	</p:column>
+	    	<p:column headerText="Nome">
+	    		<h:outputText value="#{med.nome}"/>
+	    	</p:column>
+	    	<p:column headerText="Sobrenome">
+	    		<h:outputText value="#{med.sobrenome}"/>
+	    	</p:column>
+	    	<p:column headerText="Especialidade">
+	    		<h:outputText value="#{med.especialidade.descricao}"/>
+	    	</p:column>
+	    	<p:column headerText="Ativado">
+	    		<h:outputText value="#{med.ativo}"/>
+	    	</p:column>
+	    	<p:column headerText="Opções">
+	    		<p:commandButton icon="ui-icon-pencil" title="Editar" action="#{medicoBean.edita(med)}" update="@form"/>
+	    		<p:commandButton icon="ui-icon-trash" title="Remover" action="#{medicoBean.remove(med)}" update="@form"/>
+	    	</p:column>
+	    </p:dataTable>
 	</h:form>
 	
 </div>

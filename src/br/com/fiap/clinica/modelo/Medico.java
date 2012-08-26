@@ -7,12 +7,16 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="medico")
 public class Medico implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
@@ -23,6 +27,10 @@ public class Medico implements Serializable {
 	private String sobrenome;
 	
 	private Boolean ativo;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_especialidade")
+	private Especialidade especialidade;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="medico")
 	private Collection<Agendamento> agendamentos;
@@ -67,5 +75,12 @@ public class Medico implements Serializable {
 		this.agendamentos = agendamentos;
 	}
 	
+	public Especialidade getEspecialidade(){
+		return especialidade;
+	}
+	
+	public void setEspecialidade(Especialidade especialidade){
+		this.especialidade = especialidade;
+	}
 	
 }
