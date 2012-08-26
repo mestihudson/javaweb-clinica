@@ -18,6 +18,7 @@ public class MedicoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Medico medico;
+	private Especialidade especialidade; 
 	private EntityManager      em     = new JPAUtil().getEntityManager();
 	private DAO<Medico>        dao    = new DAO<Medico>(Medico.class, em);
 	private DAO<Especialidade> daoEsp = new DAO<Especialidade>(Especialidade.class, em);
@@ -27,6 +28,14 @@ public class MedicoBean implements Serializable {
 	
 	public MedicoBean() {
 		limpaForm();
+	}
+	
+	public Especialidade getEspecialidade(){
+		return this.especialidade;
+	}
+	
+	public void setEspecialidade(Especialidade especialidade){
+		this.especialidade = especialidade;
 	}
 	
 	public List<Especialidade> getEspecialidades() {
@@ -39,9 +48,9 @@ public class MedicoBean implements Serializable {
 	
 	public void limpaForm() {
 		this.medico = new Medico();
-		this.especialidades = daoEsp.lista();
 		this.medicos = dao.lista();
-		this.medico.setEspecialidade(new Especialidade());
+		this.especialidades = daoEsp.lista();
+		this.especialidade = new Especialidade();
 	}
 	
 	public Medico getMedico() {
@@ -51,6 +60,7 @@ public class MedicoBean implements Serializable {
 	public void grava() {
 		try {
 			em.getTransaction().begin();
+			this.medico.setEspecialidade(daoEsp.buscaPeloId(this.especialidade.getId()));
 			if (this.medico.getId() == null){
 				dao.adiciona(medico);
 			} else {
@@ -60,8 +70,8 @@ public class MedicoBean implements Serializable {
 			em.getTransaction().commit();
 		} catch (Exception e) {
 			em.getTransaction().rollback();
-			limpaForm();
 		}
+		limpaForm();
 	}
 	
 	public void altera() {
@@ -70,6 +80,7 @@ public class MedicoBean implements Serializable {
 	
 	public void edita(Medico aEditar){
 		this.medico = aEditar;
+		this.especialidade.setId(aEditar.getEspecialidade().getId());
 	}
 	
 	public void remove(Medico aRemover){
