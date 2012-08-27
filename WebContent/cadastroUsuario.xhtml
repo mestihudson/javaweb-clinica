@@ -14,23 +14,50 @@
 <div id="conteudo"> 
 	<!-- Menu -->
 	<ui:include src="menu.xhtml"/>
-	
-	<h:form>
-		<p:panel id="cadastroUsuario" header="Cadastro de Usuário">
+	<br />
+	<h:form id="form">
+		<p:panel id="cadastroUsuario" header="Cadastro de Usuário" style="margin-bottom:10px;">
 			<p:messages/>
 			<h:panelGrid columns="2">			
 				<h:outputLabel for="nome" value="Nome"/>
-				<p:inputText id="nome" required="true" value="#{usuarioBean.usuario.nome}"/>
+				<p:inputText id="nome" value="#{usuarioBean.usuario.nome}"/>
 				<h:outputLabel for="login" value="Login"/>
-				<p:inputText id="login" required="true" value="#{usuarioBean.usuario.login}"/>
+				<p:inputText id="login" value="#{usuarioBean.usuario.login}"/>
 				<h:outputLabel for="senha" value="Senha"/>
-				<p:password id="senha" required="true" value="#{usuarioBean.usuario.senha}"/>
+				<p:password id="senha" value="#{usuarioBean.usuario.senha}"/>
 				<h:outputLabel for="admin" value="Admin?"/>
 				<p:selectBooleanCheckbox id="admin" value="#{usuarioBean.usuario.admin}"/>
 				
-				<p:commandButton id="gravar" value="Gravar" />
-			</h:panelGrid>
+				<p:commandButton value="Cancelar" update="cadastroUsuario" id="btnCancelar" actionListener="#{convenioBean.limpaForm}" />
+				<p:commandButton id="gravar" value="Gravar" update="@form" actionListener="#{usuarioBean.grava}"/>
+			</h:panelGrid>			
 		</p:panel>		
+	    <p:dataTable value="#{usuarioBean.usuarios}" var="usuario" paginator="true" rows="10"  
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 rowsPerPageTemplate="5,10,15">
+			<f:facet name="header">
+				Usuários Cadastrados
+			</f:facet>
+	    	<p:column headerText="ID">
+	    		<h:outputText value="#{usuario.id}"/>
+	    	</p:column>
+	    	<p:column headerText="Nome">
+	    		<h:outputText value="#{usuario.nome}"/>
+	    	</p:column>
+	    	<p:column headerText="Login">
+	    		<h:outputText value="#{usuario.login}"/>
+	    	</p:column>	    	
+	    	<p:column headerText="Ativado">
+	    		<h:outputText value="#{convenio.ativo}"/>
+	    	</p:column>
+	    	<p:column headerText="Admin">
+	    		<h:outputText value="#{convenio.admin}"/>
+	    	</p:column>
+	    	<p:column headerText="Opções">
+	    		<p:commandButton icon="ui-icon-pencil" title="Editar" action="#{usuarioBean.edita(usuario)}" update="@form"/>
+	    		<p:commandButton icon="ui-icon-close" title="Remover" action="#{usuarioBean.remove(usuario)}" update="@form"/>
+	    	</p:column>
+	    </p:dataTable>		
 	</h:form>
 </div>
 </h:body>
