@@ -280,7 +280,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `usuario` ;
 
 CREATE  TABLE IF NOT EXISTS `usuario` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NULL ,
   `login` VARCHAR(45) NULL ,
   `senha` VARCHAR(45) NULL ,
