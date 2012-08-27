@@ -5,8 +5,11 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
 	<title>Acesso</title>
+	<link type="text/css" rel="stylesheet" href="css/login.css"/>
 </h:head>
 <h:body>
+<h1>JavaWEB - Sistema Clinica</h1>
+<div id="box">
 	<h:form id="formLogin">
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Login:"/>
@@ -16,5 +19,6 @@
 			<h:commandButton value="Efetuar Login" action="#{loginBean.login}"/>
 		</h:panelGrid>
 	</h:form>
+</div>
 </h:body>
 </html>

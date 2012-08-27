@@ -23,7 +23,7 @@ public class LoginBean implements Serializable {
 		boolean loginOk = dao.existe(usuario);
 		
 		if (loginOk) {
-			return "inicioAdministrador?faces-redirect=true";			
+			return "cadastroConvenio?faces-redirect=true";			
 		} else {
 			return "login";
 		}
