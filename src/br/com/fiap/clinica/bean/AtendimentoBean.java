@@ -16,7 +16,7 @@ import br.com.fiap.clinica.modelo.Atendimento;
 public class AtendimentoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Atendimento atendimento;
+	private Atendimento atendimento = new Atendimento();
 	private EntityManager em = new JPAUtil().getEntityManager();
 	private DAO<Atendimento> dao = new DAO<Atendimento>(Atendimento.class, em);
 	private DAO<Agendamento> daoAg = new DAO<Agendamento>(Agendamento.class, em);
