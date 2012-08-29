@@ -62,7 +62,6 @@ public class MaterialBean implements Serializable{
 			em.getTransaction().commit();
 		}catch (Exception e) {
 			em.getTransaction().rollback();
-			throw e;
 		}
 		
 		limpaForm();

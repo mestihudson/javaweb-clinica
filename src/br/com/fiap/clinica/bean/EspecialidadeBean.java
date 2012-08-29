@@ -61,8 +61,7 @@ public class EspecialidadeBean implements Serializable{
 			
 			em.getTransaction().commit();
 		}catch (Exception e) {
-			em.getTransaction().rollback();
-			throw e;
+			em.getTransaction().rollback();			
 		}
 		
 		limpaForm();
