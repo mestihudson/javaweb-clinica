@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -32,7 +33,7 @@ public class Medico implements Serializable {
 	@JoinColumn(name = "id_especialidade")
 	private Especialidade especialidade;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="medico")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="medico", fetch=FetchType.EAGER)
 	private Collection<Agendamento> agendamentos;
 
 	public Long getId() {
