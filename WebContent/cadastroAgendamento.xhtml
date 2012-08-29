@@ -20,16 +20,16 @@
 			    <p:panel id="panel" header="Agendar Consulta" style="margin-bottom:10px;">  
 			        <p:messages id="messages" />  
 					<h:panelGrid columns="2">
-						<p:outputLabel value="Paciente:" for="cmbPaciente"/>
-						<p:selectOneMenu value="#{agendamentoBean.paciente.id}" id="cmbPaciente">
-				            <f:selectItem itemLabel="--- Selecione ---" itemValue=""/>  
-				            <f:selectItems value="#{agendamentoBean.pacientes}" var="p" itemLabel="#{p.nome}" itemValue="#{p.id}" />
-				        </p:selectOneMenu>
 						<p:outputLabel value="Área:" for="cmbArea"/>
 						<p:selectOneMenu value="#{agendamentoBean.area.id}" id="cmbArea">
 				            <f:selectItem itemLabel="--- Selecione ---" itemValue=""/>  
 				            <f:selectItems value="#{agendamentoBean.areas}" var="a" itemLabel="#{a.descricao}" itemValue="#{a.id}" />
 				            <p:ajax update="@form" listener="#{agendamentoBean.buscaMedicos}" />    
+				        </p:selectOneMenu>
+						<p:outputLabel value="Paciente:" for="cmbPaciente"/>
+						<p:selectOneMenu value="#{agendamentoBean.paciente.id}" id="cmbPaciente">
+				            <f:selectItem itemLabel="--- Selecione ---" itemValue=""/>  
+				            <f:selectItems value="#{agendamentoBean.pacientes}" var="p" itemLabel="#{p.nome}" itemValue="#{p.id}" />
 				        </p:selectOneMenu>
 				        <p:outputLabel value="Médico:" for="cmbMedico"/>
 						<p:selectOneMenu value="#{agendamentoBean.medico.id}" id="cmbMedico">
@@ -43,6 +43,8 @@
 				        </p:selectOneMenu>
 				        <p:outputLabel value="Data da Consulta:" for="txtDataConsulta"/>
 						<p:calendar value="#{agendamentoBean.agendamento.dataConsulta}" id="txtDataConsulta"/>  
+						<p:outputLabel value="Número da carteirinha:" for="txtNumeroConvenio"/>
+						<p:inputText value="#{agendamentoBean.agendamento.numeroConvenio}" id="txtNumeroConvenio"/>
 						<p:outputLabel value="Status:" for="optStatus"/>
 						<p:selectOneButton value="#{agendamentoBean.agendamentoStatus}" id="optStatus">
 				            <f:selectItems value="#{agendamentoBean.status}" var="s" itemLabel="#{s}" itemValue="#{s}" />

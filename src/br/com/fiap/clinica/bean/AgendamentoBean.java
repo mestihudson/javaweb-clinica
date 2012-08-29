@@ -58,6 +58,7 @@ public class AgendamentoBean implements Serializable{
 			this.agendamento.setPaciente(daoPaciente.buscaPeloId(this.paciente.getId()));
 			this.agendamento.setMedico(daoMedico.buscaPeloId(this.medico.getId()));
 			this.agendamento.setAgendamentoStatus(this.agendamentoStatus);
+			this.agendamento.setNumeroConvenio(this.agendamento.getNumeroConvenio());
 			this.agendamento.setAtivo(true);
 			
 			if (this.agendamento.getId() == null) {			
@@ -114,6 +115,7 @@ public class AgendamentoBean implements Serializable{
 		this.convenios = daoConvenio.lista();
 		this.pacientes = daoPaciente.lista();
 		this.medicos = new ArrayList<Medico>();
+		this.agendamentos = dao.lista();
 	}
 
 	public List<Area> getAreas() {
@@ -162,10 +164,6 @@ public class AgendamentoBean implements Serializable{
 	
 	public AgendamentoStatus getAgendamentoStatus(){
 		return this.agendamentoStatus;
-	}
-	
-	public void getDataConsulta(){
-		
 	}
 	
 	public void setAgendamentoStatus(AgendamentoStatus status){
