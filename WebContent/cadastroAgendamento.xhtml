@@ -5,15 +5,79 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<title>Agendamento de Consulta</title>
-	<link type="text/css" rel="stylesheet" href="css/estilo.css"/>
-	<link type="text/css" rel="stylesheet" href="css/cupertino/jquery.ui.theme.css"/>
-</h:head>
-<h:body>
-<div id="conteudo">
-	<!-- Menu -->
-	<ui:include src="menu.xhtml" />
-</div>
-</h:body>	
+	<h:head>
+		<title>Agendamento</title>
+		<link type="text/css" rel="stylesheet" href="css/estilo.css"/>
+		<link type="text/css" rel="stylesheet" href="css/cupertino/jquery.ui.theme.css"/>	
+	</h:head>
+	<h:body>
+		<div id="conteudo">
+			<!-- Menu -->
+			<ui:include src="menu.xhtml" />
+			<br/>
+			
+			<h:form id="form">  
+			    <p:panel id="panel" header="Agendar Consulta" style="margin-bottom:10px;">  
+			        <p:messages id="messages" />  
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Paciente:" for="cmbPaciente"/>
+						<p:selectOneMenu value="#{agendamentoBean.paciente.id}" id="cmbPaciente">
+				            <f:selectItem itemLabel="--- Selecione ---" itemValue=""/>  
+				            <f:selectItems value="#{agendamentoBean.pacientes}" var="p" itemLabel="#{p.nome}" itemValue="#{p.id}" />
+				        </p:selectOneMenu>
+						<p:outputLabel value="Área:" for="cmbArea"/>
+						<p:selectOneMenu value="#{agendamentoBean.area.id}" id="cmbArea">
+				            <f:selectItem itemLabel="--- Selecione ---" itemValue=""/>  
+				            <f:selectItems value="#{agendamentoBean.areas}" var="a" itemLabel="#{a.descricao}" itemValue="#{a.id}" />
+				            <p:ajax update="@form" listener="#{agendamentoBean.buscaMedicos}" />    
+				        </p:selectOneMenu>
+				        <p:outputLabel value="Médico:" for="cmbMedico"/>
+						<p:selectOneMenu value="#{agendamentoBean.medico.id}" id="cmbMedico">
+				            <f:selectItem itemLabel="--- Selecione ---" itemValue=""/>  
+				            <f:selectItems value="#{agendamentoBean.medicos}" var="m" itemLabel="#{m.nome}" itemValue="#{m.id}" />
+				        </p:selectOneMenu>
+				        <p:outputLabel value="Convênio:" for="cmbConvenio"/>
+						<p:selectOneMenu value="#{agendamentoBean.convenio.id}" id="cmbConvenio">
+				            <f:selectItem itemLabel="--- Selecione ---" itemValue=""/>  
+				            <f:selectItems value="#{agendamentoBean.convenios}" var="c" itemLabel="#{c.descricao}" itemValue="#{c.id}" />
+				        </p:selectOneMenu>
+				        <p:outputLabel value="Data da Consulta:" for="txtDataConsulta"/>
+						<p:calendar value="#{agendamentoBean.agendamento.dataConsulta}" id="txtDataConsulta"/>  
+						<p:outputLabel value="Status:" for="optStatus"/>
+						<p:selectOneButton value="#{agendamentoBean.agendamentoStatus}" id="optStatus">
+				            <f:selectItems value="#{agendamentoBean.status}" var="s" itemLabel="#{s}" itemValue="#{s}" />
+				        </p:selectOneButton>
+						<p:commandButton value="Cancelar" update="panel" id="btnCancelar" actionListener="#{agendamentoBean.limpaForm}" /> 
+				    	<p:commandButton value="Salvar" update="@form" id="btnSalvar" actionListener="#{agendamentoBean.grava}" /> 
+					</h:panelGrid>
+			    </p:panel>  
+			    <p:dataTable value="#{agendamentoBean.agendamentos}" var="agmnt" paginator="true" rows="10"  
+		                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+		                 rowsPerPageTemplate="5,10,15">
+					<f:facet name="header">
+						Agenda
+					</f:facet>
+			    	<p:column headerText="ID">
+			    		<h:outputText value="#{agmnt.id}"/>
+			    	</p:column>
+			    	<p:column headerText="Paciente">
+			    		<h:outputText value="#{agmnt.paciente.nome}"/>
+			    	</p:column>
+			    	<p:column headerText="Médico">
+			    		<h:outputText value="#{agmnt.medico.nome}"/>
+			    	</p:column>
+			    	<p:column headerText="Convênio">
+			    		<h:outputText value="#{agmnt.convenio.descricao}"/>
+			    	</p:column>
+			    	<p:column headerText="Confirmado?">
+			    		<h:outputText value="#{agmnt.ativo}"/>
+			    	</p:column>
+			    	<p:column headerText="Opções">
+			    		<p:commandButton icon="ui-icon-pencil" title="Editar" action="#{agendamentoBean.edita(agmnt)}" update="@form"/>
+			    		<p:commandButton icon="ui-icon-close" title="Remover" action="#{agendamentoBean.remove(agmnt)}" update="@form"/>
+			    	</p:column>
+			    </p:dataTable>
+			</h:form>
+		</div>
+	</h:body>	
 </html>

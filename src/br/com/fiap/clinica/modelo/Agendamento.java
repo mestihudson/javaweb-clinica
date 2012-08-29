@@ -7,6 +7,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -17,6 +19,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "agendamento")
 public class Agendamento implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
@@ -43,6 +47,8 @@ public class Agendamento implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "agendamento")
 	private Collection<Atendimento> atendimentos;
 
+	@Enumerated
+	@Column(name="id_agendamento_status")
 	private AgendamentoStatus agendamentoStatus;
 
 	private Boolean ativo;
