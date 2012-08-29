@@ -7,40 +7,46 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Atendimento</title>
-	<link type="text/css" rel="stylesheet" href="css/estilo.css"/>
-	<link type="text/css" rel="stylesheet" href="css/cupertino/jquery.ui.theme.css"/>	
+	<link type="text/css" rel="stylesheet" href="css/estilo.css" />
+	<link type="text/css" rel="stylesheet"
+		href="css/cupertino/jquery.ui.theme.css" />
 </h:head>
 <h:body>
-<div id="conteudo">
-	<!-- Menu -->
-	<ui:include src="menu.xhtml" />
-	
-	
-	<h:form id="form">
-		<p:panel id="panel" header="Atendimento">
-			<p:messages id="messages" />
-			<h:panelGrid columns="2" style="width:500px;">
-				<h:outputLabel value="Nome:" />
-				<h:outputLabel value="#{atendimentoBean.atendimento.agendamento.paciente.nome} #{atendimentoBean.atendimento.agendamento.paciente.sobrenome}" />
-				<h:outputLabel value="CPF:" />
-				<h:outputLabel value="#{atendimentoBean.atendimento.agendamento.paciente.cpf}" />
-				<h:outputLabel value="Convênio:" />
-				<h:outputLabel value="#{atendimentoBean.atendimento.agendamento.convenio.descricao}" />
-				
-				<h:outputLabel value="Ativo:" for="optAtivo"/>
-				<p:selectBooleanButton value="#{atendimentoBean.atendimento.ativo}" id="optAtivo" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
-				
-				<h:outputText value="Tratamento(s) e Medicamento(s): " />  
-	        	<p:selectManyMenu value="#{atendimentoBean.atendimentoMateriais}" style="height:150px;width:200px;">  
-		        	<f:selectItems value="#{atendimentoBean.materiais}" var="tratamento" itemLabel="#{tratamento.descricao}" itemValue="#{tratamento}" />
-		        </p:selectManyMenu>
-		        
-				<p:commandButton value="Cancelar" update="panel" id="btnCancelar" actionListener="#{atendimentoBean.limpaForm}" />
-				<p:commandButton value="Salvar"   update="@form" id="btnSalvar"   actionListener="#{atendimentoBean.grava}" />
-			</h:panelGrid>
-		</p:panel>
-	</h:form>
-	
-</div>
-</h:body>	
+	<div id="conteudo">
+		<!-- Menu -->
+		<ui:include src="menu.xhtml" />
+		<h:form id="form">
+			<p:panel id="panel" header="Atendimento">
+				<p:messages id="messages" />
+				<h:panelGrid columns="2" style="width:500px;">
+					<h:outputLabel value="Nome:" />
+					<h:outputLabel
+						value="#{atendimentoBean.atendimento.agendamento.paciente.nome} #{atendimentoBean.atendimento.agendamento.paciente.sobrenome}" />
+					<h:outputLabel value="CPF:" />
+					<h:outputLabel
+						value="#{atendimentoBean.atendimento.agendamento.paciente.cpf}" />
+					<h:outputLabel value="Convênio:" />
+					<h:outputLabel
+						value="#{atendimentoBean.atendimento.agendamento.convenio.descricao}" />
+					<h:outputLabel value="Ativo:" for="optAtivo" />
+					<p:selectBooleanButton value="#{atendimentoBean.atendimento.ativo}"
+						id="optAtivo" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check"
+						offIcon="ui-icon-close" />
+					<h:outputText value="Tratamento(s) e Medicamento(s): " />
+					<p:selectManyMenu value="#{atendimentoBean.atendimentoMateriais}"
+						style="height:150px;width:200px;">
+						<f:selectItems value="#{atendimentoBean.materiais}"
+							var="tratamento" itemLabel="#{tratamento.descricao}"
+							itemValue="#{tratamento}" />
+					</p:selectManyMenu>
+
+					<p:commandButton value="Cancelar" update="panel" id="btnCancelar"
+						actionListener="#{atendimentoBean.limpaForm}" />
+					<p:commandButton value="Salvar" update="@form" id="btnSalvar"
+						actionListener="#{atendimentoBean.grava}" />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</div>
+</h:body>
 </html>
