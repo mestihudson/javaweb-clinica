@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -30,7 +31,7 @@ public class Especialidade implements Serializable {
 
 	private Boolean ativa;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "especialidade")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "especialidade", fetch=FetchType.EAGER)
 	private Collection<EspecialidadeTratamento> especialidadeTratamentos;
 
 	public Long getId() {

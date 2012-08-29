@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -33,7 +34,7 @@ public class Material implements Serializable {
 	@JoinColumn(name = "id_material_tipo")
 	private MaterialTipo materialTipo;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "material")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "material", fetch=FetchType.EAGER)
 	private Collection<AtendimentoMaterial> atendimentoMateriais;
 
 	public Long getId() {

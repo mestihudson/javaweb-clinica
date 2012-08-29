@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,7 +27,7 @@ public class Atendimento implements Serializable {
 	@JoinColumn(name = "id_agendamento")
 	private Agendamento agendamento;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "atendimento")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "atendimento", fetch=FetchType.EAGER)
 	private Collection<AtendimentoMaterial> atendimentoMateriais;
 
 	public Long getId() {

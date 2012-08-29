@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -44,7 +45,7 @@ public class Agendamento implements Serializable {
 	@JoinColumn(name = "id_medico")
 	private Medico medico;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "agendamento")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "agendamento", fetch=FetchType.EAGER)
 	private Collection<Atendimento> atendimentos;
 
 	@Enumerated

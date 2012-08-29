@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -27,7 +28,7 @@ public class Tratamento implements Serializable {
 
 	private Boolean ativo;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tratamento")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tratamento", fetch=FetchType.EAGER)
 	private Collection<EspecialidadeTratamento> especialidadeTratamentos;
 
 	public Long getId() {
