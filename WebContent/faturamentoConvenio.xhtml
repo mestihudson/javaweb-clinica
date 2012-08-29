@@ -7,14 +7,30 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Faturamento por Convênio</title>
-	<link type="text/css" rel="stylesheet" href="css/estilo.css"/>
-	<link type="text/css" rel="stylesheet" href="css/cupertino/jquery.ui.theme.css"/>
+	<link type="text/css" rel="stylesheet" href="css/estilo.css" />
+	<link type="text/css" rel="stylesheet"
+		href="css/cupertino/jquery.ui.theme.css" />
 </h:head>
 <h:body>
-<div id="conteudo"> 
-	<!-- Menu -->
-	<ui:include src="menu.xhtml"/>
-	
-</div>
+	<div id="conteudo">
+		<!-- Menu -->
+		<ui:include src="menu.xhtml" />
+		<br/>
+		<p:dataTable value="#{faturamentoBean.faturamentoPorConvenio}" var="convenio"
+			paginator="true" rows="25"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10, 15, 25">
+			<f:facet name="header">Faturamento por Convenio</f:facet>
+			<p:column headerText="Convenio">
+				<h:outputText value="#{convenio.descricao}" />
+			</p:column>
+			<p:column headerText="Qtd Agendamentos">
+				<h:outputText value="#{convenio.agendamento.size}" />
+			</p:column>
+			<p:column headerText="Valor Total">
+				<h:outputText value="#{convenio.descricao}" />
+			</p:column>			
+		</p:dataTable>
+	</div>
 </h:body>
 </html>

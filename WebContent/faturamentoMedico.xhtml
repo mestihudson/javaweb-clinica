@@ -14,7 +14,22 @@
 <div id="conteudo"> 
 	<!-- Menu -->
 	<ui:include src="menu.xhtml"/>
-	
+		<br/>
+		<p:dataTable value="#{faturamentoBean.faturamentoPorMedico}" var="medico"
+			paginator="true" rows="25"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10, 15, 25">
+			<f:facet name="header">Faturamento por Medico</f:facet>
+			<p:column headerText="Medico">
+				<h:outputText value="#{medico.nome}" />
+			</p:column>
+			<p:column headerText="Qtd Agendamentos">
+				<h:outputText value="#{medico.agendamento.size}" />
+			</p:column>
+			<p:column headerText="Valor Total">
+				<h:outputText value="#{medico.descricao}" />
+			</p:column>			
+		</p:dataTable>	
 </div>
 </h:body>
 </html>
