@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import br.com.fiap.clinica.dao.UsuarioDAO;
 import br.com.fiap.clinica.modelo.Usuario;
@@ -28,6 +30,14 @@ public class LoginBean implements Serializable {
 			return "login";
 		}
 	}
+
+	public String efetuaLogout(){
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		HttpSession s = (HttpSession)ctx.getExternalContext().getSession(true);
+		s.invalidate();
+		
+		return "login?faces-redirect=true";
+	}	
 	
 	public Usuario getUsuario() {
 		return usuario;
