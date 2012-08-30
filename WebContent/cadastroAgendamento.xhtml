@@ -103,7 +103,7 @@
 						        </p:selectManyMenu>
 						        
 								<p:commandButton value="Cancelar" update="panel" id="btnCancelarAtendimento" widgetVar="btnCancelarAtendimento" actionListener="#{atendimentoBean.limpaForm}" />
-								<p:commandButton value="Salvar"   update="@form" id="btnSalvar"   actionListener="#{atendimentoBean.grava}" />
+								<p:commandButton value="Salvar"   update="@form" id="btnSalvar"   actionListener="#{atendimentoBean.grava}" oncomplete="dlg.hide();" />
 							</h:panelGrid>
 						</p:panel>
 					</h:form>
