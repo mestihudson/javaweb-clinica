@@ -3,15 +3,13 @@ package br.com.fiap.clinica.modelo;
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,8 +32,8 @@ public class Material implements Serializable {
 	@JoinColumn(name = "id_material_tipo")
 	private MaterialTipo materialTipo;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "material", fetch=FetchType.EAGER)
-	private Collection<AtendimentoMaterial> atendimentoMateriais;
+	@ManyToMany(mappedBy="materiais")
+	private Collection<Atendimento> atendimentos;
 
 	public Long getId() {
 		return id;
@@ -77,13 +75,11 @@ public class Material implements Serializable {
 		this.materialTipo = materialTipo;
 	}
 
-	public Collection<AtendimentoMaterial> getAtendimentoMateriais() {
-		return atendimentoMateriais;
+	public Collection<Atendimento> getAtendimentos() {
+		return atendimentos;
 	}
 
-	public void setAtendimentoMateriais(
-			Collection<AtendimentoMaterial> atendimentoMateriais) {
-		this.atendimentoMateriais = atendimentoMateriais;
+	public void setAtendimentos(Collection<Atendimento> atendimentos) {
+		this.atendimentos = atendimentos;
 	}
-
 }

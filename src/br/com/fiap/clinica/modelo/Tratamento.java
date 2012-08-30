@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,6 +17,8 @@ import javax.persistence.Entity;
 @Entity
 @Table(name = "tratamento")
 public class Tratamento implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue
@@ -30,6 +33,9 @@ public class Tratamento implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "tratamento", fetch=FetchType.EAGER)
 	private Collection<EspecialidadeTratamento> especialidadeTratamentos;
+	
+	@ManyToMany(mappedBy="tratamentos")
+	private Collection<Atendimento> atendimentos;
 
 	public Long getId() {
 		return id;
@@ -72,4 +78,12 @@ public class Tratamento implements Serializable {
 		this.especialidadeTratamentos = especialidadeTratamentos;
 	}
 
+	public Collection<Atendimento> getAtendimentos() {
+		return atendimentos;
+	}
+
+	public void setAtendimentos(Collection<Atendimento> atendimentos) {
+		this.atendimentos = atendimentos;
+	}
+	
 }
