@@ -77,10 +77,10 @@
 			    	<p:column headerText="Opções">
 			    		<p:commandButton icon="ui-icon-pencil" title="Editar" action="#{agendamentoBean.edita(agmnt)}" update="@form"/>
 			    		<p:commandButton icon="ui-icon-close" title="Remover" action="#{agendamentoBean.remove(agmnt)}" update="@form"/>
-			    		<p:commandButton icon="ui-icon-find" title="Atender" action="#{atendimentoBean.atende(agmnt)}" update=":form:form1" onclick="dlg.show()"/>
+			    		<p:commandButton icon="ui-icon-find" title="Atender" action="#{atendimentoBean.atende(agmnt)}" update=":form:form1" onclick="dlg.show();"/>
 			    	</p:column>
 			    </p:dataTable>
-			    <p:dialog header="Atender" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg" id="dlg" onShow="">
+			    <p:dialog header="Atender" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg" id="dlg" onShow="PrimeFaces.ab({source:'form:form1:btnCancelarAtendimento',update:'form:form1:panel'});return false;">
 			  		<h:form id="form1">
 						<p:panel id="panel" header="Atendimento">
 							<p:messages id="messages" />
@@ -102,7 +102,7 @@
 						        	<f:selectItems value="#{atendimentoBean.medicamentos}" var="remedio" itemLabel="#{remedio.descricao}" itemValue="#{remedio.id}" />
 						        </p:selectManyMenu>
 						        
-								<p:commandButton value="Cancelar" update="panel" id="btnCancelar" actionListener="#{atendimentoBean.limpaForm}" />
+								<p:commandButton value="Cancelar" update="panel" id="btnCancelarAtendimento" widgetVar="btnCancelarAtendimento" actionListener="#{atendimentoBean.limpaForm}" />
 								<p:commandButton value="Salvar"   update="@form" id="btnSalvar"   actionListener="#{atendimentoBean.grava}" />
 							</h:panelGrid>
 						</p:panel>
