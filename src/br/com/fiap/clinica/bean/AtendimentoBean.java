@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import br.com.fiap.clinica.dao.DAO;
 import br.com.fiap.clinica.dao.JPAUtil;
 import br.com.fiap.clinica.modelo.Agendamento;
+import br.com.fiap.clinica.modelo.AgendamentoStatus;
 import br.com.fiap.clinica.modelo.Atendimento;
 import br.com.fiap.clinica.modelo.Material;
 import br.com.fiap.clinica.modelo.Tratamento;
@@ -80,6 +81,8 @@ public class AtendimentoBean implements Serializable {
 	public void grava() {
 		try {
 			em.getTransaction().begin();
+			
+			this.atendimento.getAgendamento().setAgendamentoStatus(AgendamentoStatus.EFETIVADO);
 			
 			this.atendimento.setAtivo(true);
 			
