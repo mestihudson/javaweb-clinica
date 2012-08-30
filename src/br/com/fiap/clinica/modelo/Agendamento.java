@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name =  "agendamento")
+@Table(name="agendamento")
 public class Agendamento implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -45,7 +45,7 @@ public class Agendamento implements Serializable {
 	@JoinColumn(name = "id_medico")
 	private Medico medico;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "agendamento", fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "agendamento")
 	private Collection<Atendimento> atendimentos;
 
 	@Enumerated

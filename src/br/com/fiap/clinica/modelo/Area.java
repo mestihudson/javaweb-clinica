@@ -24,7 +24,7 @@ public class Area implements Serializable {
 	
 	private Boolean ativa;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="area", fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="area")
 	private Collection<Especialidade> especialidades;
 
 	public Long getId() {

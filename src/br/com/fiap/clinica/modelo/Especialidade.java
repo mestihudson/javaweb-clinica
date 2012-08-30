@@ -31,7 +31,7 @@ public class Especialidade implements Serializable {
 
 	private Boolean ativa;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "especialidade", fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "especialidade")
 	private Collection<EspecialidadeTratamento> especialidadeTratamentos;
 
 	public Long getId() {

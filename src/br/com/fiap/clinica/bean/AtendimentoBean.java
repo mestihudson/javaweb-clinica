@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 
 import br.com.fiap.clinica.dao.DAO;
@@ -16,7 +16,7 @@ import br.com.fiap.clinica.modelo.Material;
 import br.com.fiap.clinica.modelo.Tratamento;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class AtendimentoBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -35,7 +35,12 @@ public class AtendimentoBean implements Serializable {
 	private List<Long> medicamentosSelecionados;
 
 	public AtendimentoBean(){
+		this.atendimento = new Atendimento();
 		limpaForm();
+	}
+	
+	public void atende(Agendamento agendamento){
+		this.atendimento.setAgendamento(agendamento);
 	}
 	
 	public Atendimento getAtendimento() {
@@ -101,12 +106,6 @@ public class AtendimentoBean implements Serializable {
 	}
 	
 	public void limpaForm(){
-		this.atendimento = new Atendimento();
-		
-		Agendamento agendamento = new Agendamento();
-		agendamento.setId(1L);
-		this.atendimento.setAgendamento(agendamento);
-		
 		this.tratamentos  = daoTr.lista();
 		this.medicamentos = daoMedicamento.lista();
 		this.tratamentosSelecionados = new ArrayList<Long>();

@@ -31,7 +31,7 @@ public class Paciente implements Serializable {
 	
 	private Boolean ativo;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="paciente", fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="paciente")
 	private Collection<Agendamento> agendamentos;
 
 	public Long getId() {

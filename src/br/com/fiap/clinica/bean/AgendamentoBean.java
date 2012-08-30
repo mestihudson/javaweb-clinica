@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
 
 import br.com.fiap.clinica.dao.DAO;
@@ -20,7 +20,7 @@ import br.com.fiap.clinica.modelo.Medico;
 import br.com.fiap.clinica.modelo.Paciente;
 
 @ManagedBean	
-@ViewScoped
+@SessionScoped
 public class AgendamentoBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -103,6 +103,21 @@ public class AgendamentoBean implements Serializable {
 		this.medicos = daoMedico.buscaMedicosPelaArea(this.area.getId());
 	}
 	
+	private List<Agendamento> listaDeAgendamento(){
+		List<Agendamento> lista = new ArrayList<Agendamento>();
+	
+		Paciente paciente2 = new Paciente();
+		paciente2.setCpf("11111111111");
+		paciente2.setNome("Marcio");
+		paciente2.setSobrenome("Siggia");
+		
+		Agendamento agendamento1 = new Agendamento();
+		agendamento1.setPaciente(paciente2);
+		
+		lista.add(agendamento1);
+		return lista;
+	}
+	
 	public void limpaForm(){
 		this.area = new Area();
 		this.agendamento = new Agendamento();
@@ -116,6 +131,7 @@ public class AgendamentoBean implements Serializable {
 		this.pacientes = daoPaciente.lista();
 		this.medicos = new ArrayList<Medico>();
 		this.agendamentos = dao.lista();
+		//this.agendamentos = listaDeAgendamento();
 	}
 
 	public List<Area> getAreas() {

@@ -77,8 +77,37 @@
 			    	<p:column headerText="Opções">
 			    		<p:commandButton icon="ui-icon-pencil" title="Editar" action="#{agendamentoBean.edita(agmnt)}" update="@form"/>
 			    		<p:commandButton icon="ui-icon-close" title="Remover" action="#{agendamentoBean.remove(agmnt)}" update="@form"/>
+			    		<p:commandButton icon="ui-icon-find" title="Atender" action="#{atendimentoBean.atende(agmnt)}" update=":form:form1" onclick="dlg.show()"/>
 			    	</p:column>
 			    </p:dataTable>
+			    <p:dialog header="Atender" modal="true" showEffect="fade" hideEffect="fade" widgetVar="dlg" id="dlg" onShow="">
+			  		<h:form id="form1">
+						<p:panel id="panel" header="Atendimento">
+							<p:messages id="messages" />
+							<h:panelGrid columns="2" style="width:500px;">
+								<h:outputLabel value="Nome:" />
+								<h:outputLabel value="#{atendimentoBean.atendimento.agendamento.paciente.nome}" />
+								<h:outputLabel value="CPF:" />
+								<h:outputLabel value="#{atendimentoBean.atendimento.agendamento.paciente.cpf}" />
+								<h:outputLabel value="Convênio:" />
+								<h:outputLabel value="#{atendimentoBean.atendimento.agendamento.convenio.descricao}" />
+								
+								<h:outputText value="Tratamento(s): " />  
+					        	<p:selectManyMenu value="#{atendimentoBean.tratamentosSelecionados}" style="height:150px;width:200px;">  
+						        	<f:selectItems value="#{atendimentoBean.tratamentos}" var="tratamento" itemLabel="#{tratamento.descricao}" itemValue="#{tratamento.id}" />
+						        </p:selectManyMenu>
+						        
+						        <h:outputText value="Medicamento(s): " />  
+					        	<p:selectManyMenu value="#{atendimentoBean.medicamentosSelecionados}" style="height:150px;width:200px;">  
+						        	<f:selectItems value="#{atendimentoBean.medicamentos}" var="remedio" itemLabel="#{remedio.descricao}" itemValue="#{remedio.id}" />
+						        </p:selectManyMenu>
+						        
+								<p:commandButton value="Cancelar" update="panel" id="btnCancelar" actionListener="#{atendimentoBean.limpaForm}" />
+								<p:commandButton value="Salvar"   update="@form" id="btnSalvar"   actionListener="#{atendimentoBean.grava}" />
+							</h:panelGrid>
+						</p:panel>
+					</h:form>
+			    </p:dialog>  
 			</h:form>
 		</div>
 	</h:body>	

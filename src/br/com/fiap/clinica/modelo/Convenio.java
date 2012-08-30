@@ -24,7 +24,7 @@ public class Convenio implements Serializable {
 	
 	private Boolean ativo;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="convenio", fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="convenio")
 	private Collection<Agendamento> agendamentos;
 
 	public Long getId() {

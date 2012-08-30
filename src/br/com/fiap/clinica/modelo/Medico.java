@@ -33,7 +33,7 @@ public class Medico implements Serializable {
 	@JoinColumn(name = "id_especialidade")
 	private Especialidade especialidade;
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="medico", fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="medico")
 	private Collection<Agendamento> agendamentos;
 
 	public Long getId() {

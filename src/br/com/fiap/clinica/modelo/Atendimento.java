@@ -32,7 +32,7 @@ public class Atendimento implements Serializable {
 	@JoinColumn(name = "id_agendamento")
 	private Agendamento agendamento;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "atendimento", fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "atendimento")
 	private Collection<AtendimentoMaterial> atendimentoMateriais;
 	
 	@ManyToMany
