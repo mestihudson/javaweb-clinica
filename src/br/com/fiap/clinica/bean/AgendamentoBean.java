@@ -21,7 +21,7 @@ import br.com.fiap.clinica.modelo.Paciente;
 
 @ManagedBean	
 @ViewScoped
-public class AgendamentoBean implements Serializable{
+public class AgendamentoBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
